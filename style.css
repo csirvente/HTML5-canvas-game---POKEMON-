@@ -5,3 +5,42 @@
 .hidden{
   display: none;
 }
+
+.canvas-style {
+  margin: 0px auto;
+  float: none;
+  display: table;
+}
+
+.glyphicon{
+  color:darkcyan;
+  font-size: 3.5em;
+  margin: 10px;
+}
+
+.arrows{
+  margin: 0px auto;
+  float: none;
+  display: flex;
+  align-items: center;
+}
+
+.arrows p:nth-of-type(2){
+  margin: 0px 130px 0px 0px;
+}
+
+body{
+  background-color: #d6ffed;
+}
+.container{
+  
+  width: 460px;
+}
+
+/* .up-down{
+  margin: 0 O 0 20px;
+}
+
+.right-left{
+  margin: 0 O 0 0px;
+} */

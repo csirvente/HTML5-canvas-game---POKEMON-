@@ -14,21 +14,21 @@ function updateBattle2(cb) {
   terrainImageBattle.src = "http://www.diygreat.com/cdn/20/1992/362/pokemon-battle_189249.png";
 
   pokemonBattle.onload = function () {
-  ctxBattle.drawImage(pokemonBattle, 0, 0, 160, 160, 250, 50, 160,160);
-}
-  switch (pokemonStats[wildPokemonid].type){
+    ctxBattle.drawImage(pokemonBattle, 0, 0, 160, 160, 250, 50, 160, 160);
+  }
+  switch (pokemonStats[wildPokemonid].type) {
     case "Squirtle":
-    pokemonBattle.src = "images/squirtle.png";
-    break;
+      pokemonBattle.src = "images/squirtle.png";
+      break;
     case "Bulbasaur":
       pokemonBattle.src = "images/bulbasaur.png";
-    break;
+      break;
     case "Charmander":
       pokemonBattle.src = "images/charmander.png";
-    break;
+      break;
     case "Pikachu":
-    pokemonBattle.src = "images/pikachu.png";
-  break;
+      pokemonBattle.src = "images/pikachu.png";
+      break;
   }
   // pokemonBattle.src = "https://raw.githubusercontent.com/elletricity/sprites/master/pk/001.png";
 
@@ -94,7 +94,15 @@ callPlayerMoveDamage = function () {
 };
 //CALL PLAYER ATTACK
 function selectMove() {
-  playerMove = "CUT"; // prompt("You have 4 moves, " + moves[0].move + ", " + moves[1].move + ", " + moves[2].move + " and " + moves[3].move + ", which move do you want to use?").toUpperCase();
+
+  $('#myModal').modal('show');
+
+  $(":button").on('click', function (e) {
+    playerMove = $(this).html();
+    console.log($(this).html());
+    //$('#myMainPageInput').val(value);
+
+  //playerMove = "CUT"; // prompt("You have 4 moves, " + moves[0].move + ", " + moves[1].move + ", " + moves[2].move + " and " + moves[3].move + ", which move do you want to use?").toUpperCase();
   if (playerMove === "") {
     selectMove();
   } else {
@@ -120,11 +128,12 @@ function selectMove() {
         playerAttack();
         break;
       default:
-        messageDisplay('Move not found',function () {});
+        messageDisplay('Move not found', function () { });
         selectMove();
         break;
     }
   }
+});
 }
 
 ///////////////////////////////////////////////////
@@ -134,27 +143,27 @@ function wildPokemonAttack() {
   if (pokemonHealth > 0) {
     callMoveDamage();
     pokemonHealth = pokemonHealth - damage;
-    messageDisplay("Wild " + pokemonStats[wildPokemonid].type + " uses " + moves[moveid].move + " dealing " + damage + " damage!",function () {});
+    messageDisplay("Wild " + pokemonStats[wildPokemonid].type + " uses " + moves[moveid].move + " dealing " + damage + " damage!", function () { });
     attackLoop();
   }
   else {
-    messageDisplay("Pokemon fainted",function () {});
+    messageDisplay("Pokemon fainted", function () { });
   }
 }
 //PLAYER ATTACK
 function playerAttack() {
-  messageDisplay("Player uses " + moves[playerMove].move + " dealing " + damage + " damage!",function () {
-  if (wildPokemonHealth > 0) {
-    wildPokemonHealth = wildPokemonHealth - damage;
-    messageDisplay(pokemonStats[wildPokemonid].type + " has " + wildPokemonHealth + " health remaining!",function () {
-    playerTurn = false;
-    wildPokemonFaint()
-    });
-  }
-  else {
-    messageDisplay(pokemonStats[wildPokemonid].type + " fainted",function () {});
-  }
-});
+  messageDisplay("Player uses " + moves[playerMove].move + " dealing " + damage + " damage!", function () {
+    if (wildPokemonHealth > 0) {
+      wildPokemonHealth = wildPokemonHealth - damage;
+      messageDisplay(pokemonStats[wildPokemonid].type + " has " + wildPokemonHealth + " health remaining!", function () {
+        playerTurn = false;
+        wildPokemonFaint()
+      });
+    }
+    else {
+      messageDisplay(pokemonStats[wildPokemonid].type + " fainted", function () { });
+    }
+  });
 }
 //RANDOMIZE WILD POKEMON
 function randomPokemon() {
@@ -183,7 +192,7 @@ function attackLoop() {
   if (playerTurn === false) {
     playerTurn = true;
     wildPokemonAttack();
-    
+
   } else {
     playerTurn = false;
     selectMove();
@@ -192,11 +201,11 @@ function attackLoop() {
 
 function wildPokemonFaint() {
   if (wildPokemonHealth < 1) {
-    messageDisplay(pokemonStats[wildPokemonid].type + " has fainted",function () {
+    messageDisplay(pokemonStats[wildPokemonid].type + " has fainted", function () {
       canvas.classList.toggle('hidden');
       var canvasBattle = document.getElementById("canvas-battle");
       canvasBattle.classList.toggle('hidden');
-      winner+=1;
+      winner += 1;
     });
   } else {
     attackLoop();
