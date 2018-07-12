@@ -31,6 +31,15 @@ function startGame() {
     };
 };
 
+//main sound
+var mainTheme = new Audio("https://www.dropbox.com/s/uru3oz9mxzpt5gx/main-theme.mp3?raw=1");
+mainTheme.loop = true;
+mainTheme.volume = 0.5;
+mainTheme.play();
+
+//pokeball-selection
+var pokePick = new Audio("https://www.dropbox.com/s/weemcqn1wlxelll/pickup.mp3?raw=1");
+pokePick.volume = 0.8;
 
 var direction = "stand"
 //Canvas constructor
@@ -60,6 +69,9 @@ Canvas.prototype.updateCanvas = function () {
 
     if (this.myplayer.player.x == this.mypokeball.pokeball.x && this.myplayer.player.y == this.mypokeball.pokeball.y) { // found a pokeball !! create a new one
         console.log("found a pokeball of " + this.mypokeball.spritePosition + "! Bravo! ");
+        pokePick.pause();
+        pokePick.currentTime = 0;
+        pokePick.play();
         this.mypokeball.generatePosition();
         this.mypokeball.draw();
         updateBattle();
